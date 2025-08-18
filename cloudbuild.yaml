@@ -1,14 +1,18 @@
 steps:
+# Build and push the base image
 - name: 'gcr.io/cloud-builders/docker'
+  id: build
   args: [
     'build',
-    '-t',
-    '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY_ID}/base-image:${_TAG}',
+    '-t', '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY_ID}/${_IMAGE_NAME}:latest',
+    '-f', 'Dockerfile',
     '.'
   ]
+
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY_ID}/base-image:${_TAG}']
+  id: push
+  args: ['push', '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY_ID}/${_IMAGE_NAME}:latest']
+  waitFor: ['build']
+
 images:
-- '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY_ID}/base-image:${_TAG}'
-options:
-  logging: CLOUD_LOGGING_ONLY
+- '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY_ID}/${_IMAGE_NAME}:latest'
