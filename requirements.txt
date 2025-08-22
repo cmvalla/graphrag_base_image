@@ -62,6 +62,8 @@ neo4j==5.28.2
 nodeenv==1.9.1
 numpy==1.26.4
 opentelemetry-exporter-google-cloud
+opentelemetry-api
+opentelemetry-sdk
 orjson==3.11.2
 packaging==23.2
 pandas==2.3.1
