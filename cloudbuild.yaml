@@ -3,6 +3,7 @@ steps:
 - name: 'gcr.io/${_PROJECT_ID}/my-docker-repo/gcp-terraform-build:latest'
   id: build
   args: [
+    'docker',
     'build',
     '-t', '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY_ID}/${_IMAGE_NAME}:latest',
     '-f', 'Dockerfile',
@@ -11,7 +12,7 @@ steps:
 
 - name: 'gcr.io/${_PROJECT_ID}/my-docker-repo/gcp-terraform-build:latest'
   id: push
-  args: ['push', '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY_ID}/${_IMAGE_NAME}:latest']
+  args: ['docker', 'push', '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY_ID}/${_IMAGE_NAME}:latest']
   waitFor: ['build']
 
 images:
