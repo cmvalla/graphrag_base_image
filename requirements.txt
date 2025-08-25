@@ -113,3 +113,4 @@ redis>=5.0.0
 opentelemetry-exporter-google-cloud
 opentelemetry-api
 opentelemetry-sdk
+psutil>=5.9.0
